@@ -1,0 +1,26 @@
+body {
+	background-color: #151D21;
+}
+
+canvas {
+	background-color: white;
+	border: solid black;
+	/* width: 860px;
+	height: 480px; */
+}
+
+#mainWrapper {
+	display: inline-block;
+}
+
+#testing {
+	margin-top: 10px;
+}
+
+#iter_label {
+	color: white;
+}
+
+#runButton {
+	margin-left: 5px;
+}
