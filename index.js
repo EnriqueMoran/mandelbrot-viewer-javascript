@@ -42,6 +42,18 @@ function getIterations(e) {
     } 
 }
 
+
+function getParameters(e) {
+    if(e.key === "Enter" || e == 1) {
+        x = parseFloat(document.getElementById("x_value").value);
+        y = parseFloat(document.getElementById("y_value").value);
+        iterations = parseInt(document.getElementById("iter_value").value);
+        zoom = parseFloat(document.getElementById("zoom_value").value)
+        run();
+    }   
+}
+
+
 function draw(i, j, color) {
     ctx.fillStyle = color;
     ctx.fillRect(i, j, 1, 1);
@@ -55,16 +67,17 @@ function draw2(i, j, r, g, b) {
 
 
 function run() {
-    iterations = document.getElementById("iterValue").value;
+    iterations = document.getElementById("iter_value").value;
     for(var i=0; i < width; i++) {
-        for(var j=0; j<height;j++) {
+        for(var j=0; j < height; j++) {
             normalized_i = normalize(i, x);
             normalized_j = normalize(j, y);
             var iter = mandelbrot(normalized_i, normalized_j);
             if(iter == iterations) {
                 draw(i, j, "#000000");
             } else {
-                // draw(i, j, "#FF0000");
+                var new_iter = iter + 1 - Math.log(Math.log2(Math.abs(Math.sqrt(normalized_i**2 + normalized_j**2))))
+                //var rgb = HSVtoRGB(new_iter/360, 1, 1);
                 var rgb = HSVtoRGB(iter/360, 1, 1);
                 draw2(i, j, rgb.r, rgb.g, rgb.b);
             }
@@ -79,6 +92,9 @@ function goDeeper(event){    // zoom in
     y = normalize(event.offsetY, y);
     zoom = zoom - 0.9 * zoom;
     console.log("x: ", x, "y: ", y, "zoom: ", zoom)
+    document.getElementById("x_value").value = x;
+    document.getElementById("y_value").value = y;
+    document.getElementById("zoom_value").value = zoom;
     run();
 }
 
@@ -88,6 +104,9 @@ function goHigher(event){    // zoom out
     y = normalize(event.offsetY, y);
     zoom = zoom + 0.9 * zoom;
     console.log("x: ", x, "y: ", y, "zoom: ", zoom)
+    document.getElementById("x_value").value = x;
+    document.getElementById("y_value").value = y;
+    document.getElementById("zoom_value").value = zoom;
     run();
 }
 
@@ -97,8 +116,13 @@ function reset(){
     y = 0;
     zoom = 1;
     iterations = 1000;
+    document.getElementById("x_value").value = 0;
+    document.getElementById("y_value").value = 0;
+    document.getElementById("zoom_value").value = 1;
+    document.getElementById("iter_value").value = 1000;
     run();
 }
+
 
 
 // taken from: https://stackoverflow.com/questions/17242144/javascript-convert-hsb-hsv-color-to-rgb-accurately

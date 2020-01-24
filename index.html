@@ -10,9 +10,23 @@
     <div id="mainWrapper">
        <canvas id="canvas" width="500" height="500" oncontextmenu="goHigher(event); return false;" onclick="goDeeper(event)"></canvas> 
 
-       <div id="testing">
-    		<label id="iter_label" for="iterations">Iterations: </label>
-    		<input id="iterValue" type="number" placeholder="1000" value="1000" name="iterations" onkeydown="getIterations(this)" />
+       <div id="parameters">
+       		<label id="param_label" for="x_coord">X coord: </label>
+       		<input id="x_value" type="number" placeholder="0" value="0" name="x_coord" onkeydown="getParameters(event)" />
+
+       		<label id="param_label" for="zoom">Zoom: </label>
+    		<input id="zoom_value" type="number" placeholder="1" value="1.0" name="zoom" onkeydown="getParameters(event)" /> 
+       		<br><br>
+
+       		<label id="param_label" for="y_coord">Y coord: </label>
+       		<input id="y_value" type="number" placeholder="0" value="0" name="y_coord" onkeydown="getParameters(event)" />  		
+
+
+    		<label id="param_label" for="iterations">Iterations: </label>
+    		<input id="iter_value" type="number" placeholder="1000" value="1000" name="iterations" onkeydown="getParameters(event)" />
+    		<br><br>
+
+    		<button type="button" id="goButton" onclick="getParameters(1)">Zoom</button>
     		<button type="button" id="runButton" onclick="reset()">Reset</button>
     	</div>	
     </div>
